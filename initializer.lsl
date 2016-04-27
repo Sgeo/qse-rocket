@@ -48,4 +48,18 @@ state initialized
         llMessageLinked(LINK_THIS, -1, "READY", NULL_KEY);
         llMessageLinked(LINK_THIS, 0, "Subsystems initialized.", NULL_KEY);
     }
+
+    link_message(integer sender_num, integer num, string msg, key id)
+    {
+        if(num != 300 || msg != "LAUNCH") return;
+        state launched;
+    }
+}
+
+state launched
+{
+    state_entry()
+    {
+        llMessageLinked(LINK_THIS, -1, "LAUNCH", NULL_KEY);
+    }
 }
