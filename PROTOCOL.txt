@@ -6,6 +6,6 @@ Link messages are used for everything. Channel means the integer, and the string
 
 -1: Initialization. Protocol is as follows:
     Initializer script sends -1,INIT
-    Telemetry scripts initialize, then send -1,INITED: $SCRIPT_NAME (all Telemetry scripts have names starting with telemetry_)
-    When all telemetry scripts are inited, Initializer sends -1,READY
+    Subsystem scripts initialize, then send -1,INITED: $SCRIPT_NAME (all Telemetry scripts + others have names starting with subsystem_)
+    When all subsystem scripts are inited, Initializer sends -1,READY
     When launching, Initializer sends -1,LAUNCH

@@ -11,7 +11,7 @@ default
         for(i = 0; i < numScripts; i++)
         {
             string scriptName = llGetInventoryName(INVENTORY_SCRIPT, i);
-            if(llSubStringIndex(scriptName, "telemetry_") == 0)
+            if(llSubStringIndex(scriptName, "subsystem_") == 0)
             {
                 gScripts += [scriptName];
             }
@@ -30,5 +30,22 @@ state waiting
     
     link_message(integer sender_num, integer num, string msg, key id)
     {
+        if(num != -1 || llSubStringIndex(msg, "INITED: ") != 0) return;
+        string scriptName = llGetSubString(msg, llStringLength("INITED: "), -1);
+        integer index = llListFindList(gScripts, [scriptName]);
+        if(index != -1)
+        {
+            gScripts = llDeleteSubList(gScripts, index, index);
+        }
+        if(llGetListLength(gScripts) == 0) state initialized;
+    }
+}
+
+state initialized
+{
+    state_entry()
+    {
+        llMessageLinked(LINK_THIS, -1, "READY", NULL_KEY);
+        llMessageLinked(LINK_THIS, 0, "Subsystems initialized.", NULL_KEY);
     }
 }
