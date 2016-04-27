@@ -1,0 +1,11 @@
+Link messages are used for everything. Channel means the integer, and the string is the command itself.
+
+300: A script will relay authorized chat commands into link messages on 300.
+
+0: Link messages to 0 will get relayed to multiple destinations, including optional ground-based message boards.
+
+-1: Initialization. Protocol is as follows:
+    Initializer script sends -1,INIT
+    Telemetry scripts initialize, then send -1,INITED: $SCRIPT_NAME (all Telemetry scripts have names starting with telemetry_)
+    When all telemetry scripts are inited, Initializer sends -1,READY
+    When launching, Initializer sends -1,LAUNCH
